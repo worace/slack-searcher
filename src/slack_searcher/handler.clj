@@ -11,4 +11,4 @@
   (route/not-found "Not Found"))
 
 (def app
-  (wrap-defaults app-routes (assoc site-defaults :security {:anti-forgery true})))
+  (wrap-defaults app-routes (assoc site-defaults :security {:anti-forgery false})))

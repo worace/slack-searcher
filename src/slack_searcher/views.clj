@@ -9,12 +9,16 @@
              [:body
               inner]]))
 
+(defn search-form
+  []
+  (form/form-to [:post "/search"]
+                (anti-forgery-field)
+                (form/label "query" "Enter query")
+                (form/text-field "query")))
+
 (defn index []
   (with-template [:div
-                  (form/form-to [:post "/search"]
-                                (anti-forgery-field)
-                                (form/label "query" "Enter query")
-                                (form/text-field "query"))]))
+                  (search-form)]))
 
 (defn any-results? [results]
   (> (get-in results [:hits :total]) 0))
@@ -29,7 +33,9 @@
    [:p "sorry, no results matched your search"]])
 
 (defn search [results]
-  (with-template (conj (if (any-results? results)
-                         (render-results results)
-                         (render-no-results))
-                       [:p (link-to "/" "Search Again")])))
+  (with-template [:div
+                  (if (any-results? results)
+                    (render-results results)
+                    (render-no-results))
+                  [:p "Search again: "]
+                  (search-form)]))
