@@ -1,6 +1,7 @@
-# slack-searcher
+## Slack Searcher
 
-FIXME
+Web interface to searching logs aggregated by
+[slack slurper](https://github.com/worace/slack-slurper).
 
 ## Prerequisites
 
@@ -27,6 +28,8 @@ stop on shutdown
 exec java -jar /root/slack-searcher.jar
 ```
 
-## License
+__Building the jar:__
 
-Copyright © 2015 FIXME
+```
+lein ring uberjar
+```
